@@ -1,7 +1,7 @@
 jobs:
   build:
 
-    runs-on: self-hosted   # alternate runner OS is: ubuntu-latest
+    runs-on: self-hosted 
 
     steps:
     - name: Install Power Platform Tools
