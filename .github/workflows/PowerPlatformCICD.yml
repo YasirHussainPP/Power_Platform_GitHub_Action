@@ -1,0 +1,26 @@
+name: Power Platform CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Export Solution
+      run: |
+        pac solution export --path ./solutions --name <GitHubActionDevo> --environment <https://orgca0b6436.crm11.dynamics.com/>
+      env:
+        AZURE_CLIENT_ID: ${{ secrets.POWER_PLATFORM_SPN }}
+        AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+        AZURE_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+
+    - name: Unpack Solution
+      run: |
+        pac solution unpack --zipfile ./solutions/<SOLUTION_NAME>.zip --folder ./solutions/unpacked
