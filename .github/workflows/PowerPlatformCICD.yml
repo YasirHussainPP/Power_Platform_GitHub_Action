@@ -15,7 +15,7 @@ jobs:
 
     - name: Export Solution
       run: |
-        pac solution export --path ./solutions --name <GitHubActionDevo> --environment <https://orgca0b6436.crm11.dynamics.com/>
+        pac solution export --path ./solutions --name GitHubActionDevo --environment https://orgca0b6436.crm11.dynamics.com/
       env:
         AZURE_CLIENT_ID: ${{ secrets.POWER_PLATFORM_SPN }}
         AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
@@ -23,4 +23,4 @@ jobs:
 
     - name: Unpack Solution
       run: |
-        pac solution unpack --zipfile ./solutions/<SOLUTION_NAME>.zip --folder ./solutions/unpacked
+        pac solution unpack --zipfile ./solutions/GitHubActionDevo.zip --folder ./solutions/unpacked
