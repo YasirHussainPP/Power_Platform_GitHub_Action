@@ -4,14 +4,28 @@ on:
   push:
     branches:
       - main
-      
+
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: windows-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+
+    - name: Install .NET SDK
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.x'
+
+    - name: Install Power Platform CLI
+      run: dotnet tool install --global Microsoft.PowerApps.CLI.Tool
+
+    - name: Add .NET Tools to PATH
+      run: echo "::add-path::%USERPROFILE%\.dotnet\tools"
+
+    - name: Verify Power Platform CLI Installation
+      run: pac --version
 
     - name: Export Solution
       run: |
