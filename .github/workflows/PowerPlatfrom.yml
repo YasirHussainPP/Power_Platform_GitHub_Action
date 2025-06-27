@@ -10,30 +10,27 @@ on:
       
 jobs:
   build:
-    runs-on: self-hosted   # alternate runner OS is: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - name: Install Power Platform Tools
       uses: microsoft/powerplatform-actions/actions-install@v1
 
-    - name: Verify Installation
-      run: dir C:\Windows\Temp\powerplatform-actions-bHot4J\Microsoft.PowerApps.CLI.1.43.6\tools
-
     - name: Export Solution
       uses: microsoft/powerplatform-actions/export-solution@v1
       with:
-        environment-url: 'https://myenv.crm.dynamics.com'
-        user-name: 'me@myenv.onmicrosoft.com'
+        environment-url: 'https://orgca0b6436.crm11.dynamics.com/'
+        user-name: 'Yasir@numrexpk.onmicrosoft.com'
         password-secret: ${{ secrets.PASSWORD }}
-        solution-name: aSolution
-        solution-output-file: 'aSolution.zip'
+        solution-name: GitHubActionDevo
+        solution-output-file: 'GitHubActionDevo.zip'
         working-directory: 'out'
 
     - name: Unpack Solution
       uses: microsoft/powerplatform-actions/unpack-solution@v1
       with:
-        solution-file: 'out/aSolution1.zip'
-        solution-folder: 'out/solutions/solution one'
+        solution-file: 'out/GitHubActionDevo.zip'
+        solution-folder: 'out/solutions/solution_one'
         solution-type: 'Unmanaged'
         overwrite-files: true
 
@@ -41,21 +38,12 @@ jobs:
       uses: microsoft/powerplatform-actions/publish-solution@v1
       with:
         environment-url: 'https://myenv.crm.dynamics.com'
-        user-name: 'me@myenv.onmicrosoft.com'
+        user-name: 'Yasir@numrexpk.onmicrosoft.com'
         password-secret: ${{ secrets.PASSWORD }}
 
     - name: Prepare solution changes for check-in into source control
       uses: microsoft/powerplatform-actions/branch-solution@v1
       with:
-        solution-folder: 'out/solutions/solution one'
+        solution-folder: 'out/solutions/solution_one'
         solution-target-folder: 'src/solutions/solution1'
         token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Print Environment Variables
-      run: echo ${{ toJson(env) }}
-
-    - name: Enable Debug Logging
-      run: echo "::set-env name=ACTIONS_STEP_DEBUG::true"
-
-    - name: Set Execution Policy
-      run: Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
