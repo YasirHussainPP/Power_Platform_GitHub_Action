@@ -19,7 +19,7 @@ jobs:
     - name: Export Solution
       uses: microsoft/powerplatform-actions/export-solution@v1
       with:
-        environment-url: 'https://orgca0b6436.crm11.dynamics.com/'
+        environment-url: 'https://orgca0b6436.crm11.dynamics.com'
         user-name: 'Yasir@numrexpk.onmicrosoft.com'
         password-secret: ${{ secrets.PASSWORD }}
         solution-name: GitHubActionDevo
@@ -37,7 +37,7 @@ jobs:
     - name: Publish Solution
       uses: microsoft/powerplatform-actions/publish-solution@v1
       with:
-        environment-url: 'https://myenv.crm.dynamics.com'
+        environment-url: 'https://sjp-hr.crm11.dynamics.com'
         user-name: 'Yasir@numrexpk.onmicrosoft.com'
         password-secret: ${{ secrets.PASSWORD }}
 
